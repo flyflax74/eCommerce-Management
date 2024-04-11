@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: page_head(${pageTitle}, 'none')}">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <div th:replace="~{sidebar :: sidebar}"></div>
+
+    <div id="main">
+        <div th:replace="~{header :: header}"></div>
+
+        <div class="main-content container-fluid">
+            <section class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">[[${pageTitle}]]</h2>
+                    </div>
+
+                    <form th:action="@{/sections/save/category}" th:object="${section}" method="post"
+                          onsubmit="processBeforeSubmit()">
+                        <input type="hidden" th:field="*{id}"/>
+                        <input type="hidden" th:field="*{type}"/>
+                        <input type="hidden" th:field="*{sectionOrder}"/>
+                        <div class="card-body">
+                            <div th:replace="~{sections/general_section_form :: content}">General Section Form</div>
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="categories">Categories</label>
+                                        <select id="categories" multiple class="form-control"
+                                                style="resize: vertical; height: 200px">
+                                            <option th:each="cat : ${listCategories}" th:value="${cat.id}"
+                                                    th:text="${cat.name}"/>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <input type="button" class="btn btn-secondary m-3" id="buttonAddCategory"
+                                               value="Add Category"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="chosenCategories">Chosen Categories</label>
+                                        <select multiple="multiple" id="chosenCategories" name="chosenCategories"
+                                                class="form-control" style="resize: vertical; height: 150px">
+                                            <th:block th:each="catSection : ${section.categorySections}">
+                                                <option th:value="${catSection.category.id} + '-' + ${catSection.id}"
+                                                        th:text="${catSection.category.name}"/>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="m-2">
+                                    <a class="fa-solid fa-trash text-dark" id="linkRemoveCategory" href=""
+                                       title="Remove this category"></a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="fa-solid fa-chevron-up text-dark" id="linkMoveCatUp" href=""
+                                       title="Move this category up"></a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="fa-solid fa-chevron-down text-dark" id="linkMoveCatDown" href=""
+                                       title="Move this category down"></a>
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="text-center">
+                                    <input type="submit" value="Submit" class="btn btn-primary m-3"/>
+                                    <input type="button" value="Cancel" class="btn btn-danger" id="buttonCancel"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div th:replace="~{modal_fragments :: warning_modal}"></div>
+                </div>
+            </section>
+        </div>
+        <div th:replace="~{footer :: footer}"></div>
+    </div>
+</div>
+
+<script th:src="@{/js/category_section_form.js}"></script>
+<script th:src="@{/js/feather-icons/feather.min.js}"></script>
+<script th:src="@{/vendors/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/common_form.js}"></script>
+<script type="text/javascript">
+    contextPath = "[[@{/}]]";
+    moduleUrl = "[[@{/sections}]]";
+</script>
+</body>
+</html>

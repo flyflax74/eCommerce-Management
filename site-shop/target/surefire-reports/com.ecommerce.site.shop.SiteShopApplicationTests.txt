@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.ecommerce.site.shop.SiteShopApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 9.487 s <<< FAILURE! - in com.ecommerce.site.shop.SiteShopApplicationTests
+contextLoads  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags: [com.ecommerce.site.shop.model.entity.Order.orderTracks, com.ecommerce.site.shop.model.entity.Product.details]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags: [com.ecommerce.site.shop.model.entity.Order.orderTracks, com.ecommerce.site.shop.model.entity.Product.details]
+Caused by: org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags: [com.ecommerce.site.shop.model.entity.Order.orderTracks, com.ecommerce.site.shop.model.entity.Product.details]
+

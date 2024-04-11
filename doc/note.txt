@@ -1,0 +1,23 @@
+netstat -ano | findstr <PORT>
+taskkill /F /pid <LISTENING>
+
+mvn jasypt:encrypt-value "-Djasypt.encryptor.password=<KEY>" "-Djasypt.plugin.value=<VALUE>"
+mvn jasypt:encrypt-value "-Djasypt.encryptor.password=password" "-Djasypt.plugin.value=p7k27fezqnu0uxb0"
+
+
+heroku git:clone -a ecommerce-admin
+heroku git:remote -a ecommerce-admin
+heroku domains -a ecommerce-admin
+
+git add .
+git commit -m ""
+git push heroku master
+
+mvn clean install -Dmaven.test.skip=true
+
+mvn spring-boot:build-image -Dmaven.test.skip=true
+docker images
+docker build . -t ecommerce/eurekaserver
+docker push docker.io/ecommerce/loans
+
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<div th:fragment="content" th:remove="tag">
+    <div class="form-group row">
+        <label for="orderId" class="col-sm-2 col-form-label">Order ID:</label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control" th:value="${order.id}" id="orderId">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="customer" class="col-sm-2 col-form-label">Customer:</label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control" th:value="${order.customer.fullName}" id="customer">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="productCost" class="col-sm-2 col-form-label">Product Cost:</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{productCost}" required class="form-control" id="productCost"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="subtotal" class="col-sm-2 col-form-label">Subtotal:</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{subtotal}" required class="form-control" id="subtotal"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="shippingCost" class="col-sm-2 col-form-label">Shipping Cost:</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{shippingCost}" required class="form-control" id="shippingCost"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="tax" class="col-sm-2 col-form-label">Tax:</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{tax}" required class="form-control" id="tax"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="total" class="col-sm-2 col-form-label">Total:</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{total}" required class="form-control" id="total"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="paymentMethod" class="col-sm-2 col-form-label">Payment Method:</label>
+        <div class="col-sm-10">
+            <select th:field="*{paymentMethod}" class="form-control" required style="max-width: 150px" id="paymentMethod">
+                <option th:each="pm : ${T(com.ecommerce.site.admin.model.enums.PaymentMethod).values()}" th:value="${pm}" th:text="${pm}"/>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="status" class="col-sm-2 col-form-label">Status:</label>
+        <div class="col-sm-10">
+            <select th:field="*{status}" class="form-control" required style="max-width: 150px" id="status">
+                <option th:each="os : ${T(com.ecommerce.site.admin.model.enums.OrderStatus).values()}" th:value="${os}" th:text="${os}"/>
+            </select>
+        </div>
+    </div>
+</div>
